@@ -1,10 +1,9 @@
-package com.rojel.wesv.v7;
+package com.rojel.wesv.v5;
 
 import com.rojel.wesv.ImmutableVector;
 import com.rojel.wesv.RegionWrapper;
-import com.sk89q.worldedit.math.BlockVector2;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.math.Vector3;
+import com.sk89q.worldedit.BlockVector;
+import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.ConvexPolyhedralRegion;
 import com.sk89q.worldedit.regions.EllipsoidRegion;
 import com.sk89q.worldedit.regions.Polygonal2DRegion;
@@ -19,11 +18,11 @@ import java.util.stream.Collectors;
 /**
  * @author MrMicky
  */
-public class RegionWrapper7 implements RegionWrapper {
+public class RegionWrapper5 implements RegionWrapper {
 
     private final Region region;
 
-    public RegionWrapper7(Region region) {
+    public RegionWrapper5(Region region) {
         this.region = Objects.requireNonNull(region, "region");
     }
 
@@ -48,8 +47,7 @@ public class RegionWrapper7 implements RegionWrapper {
             Polygonal2DRegion polygonalRegion = (Polygonal2DRegion) region;
 
             return polygonalRegion.getPoints().stream()
-                    .map(BlockVector2::toBlockVector3)
-                    .map(this::toImmutableVector)
+                    .map(vec -> new ImmutableVector(vec.getX(), 0, vec.getZ()))
                     .collect(Collectors.toList());
         }
         throw new IllegalArgumentException();
@@ -77,9 +75,10 @@ public class RegionWrapper7 implements RegionWrapper {
 
     @Override
     public Iterator<ImmutableVector> iterator() {
-        Iterator<BlockVector3> blockVectorIterator = region.iterator();
+        Iterator<BlockVector> blockVectorIterator = region.iterator();
 
         return new Iterator<ImmutableVector>() {
+
             @Override
             public boolean hasNext() {
                 return blockVectorIterator.hasNext();
@@ -111,11 +110,11 @@ public class RegionWrapper7 implements RegionWrapper {
         return region.toString();
     }
 
-    private ImmutableVector toImmutableVector(Vector3 vec) {
+    private ImmutableVector toImmutableVector(BlockVector vec) {
         return new ImmutableVector(vec.getX(), vec.getY(), vec.getZ());
     }
 
-    private ImmutableVector toImmutableVector(BlockVector3 vec) {
+    private ImmutableVector toImmutableVector(Vector vec) {
         return new ImmutableVector(vec.getX(), vec.getY(), vec.getZ());
     }
 

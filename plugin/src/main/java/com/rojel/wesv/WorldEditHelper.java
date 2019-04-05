@@ -6,10 +6,8 @@ import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.blocks.BaseItem;
 import com.sk89q.worldedit.blocks.BaseItemStack;
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.regions.RegionSelector;
-import com.sk89q.worldedit.world.item.ItemTypes;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -72,7 +70,7 @@ public class WorldEditHelper extends BukkitRunnable {
     }
 
     public Region getSelectedRegion(Player player) {
-        LocalSession session = WorldEdit.getInstance().getSessionManager().findByName(player.getName());
+        LocalSession session = WorldEdit.getInstance().getSession(player.getName());
 
         if (session != null && session.getSelectionWorld() != null) {
             RegionSelector selector = session.getRegionSelector(session.getSelectionWorld());
@@ -115,21 +113,9 @@ public class WorldEditHelper extends BukkitRunnable {
         }
 
         try {
-            if (wandItemField.getType() == int.class) { // WE & FAWE under 1.13
+            if (wandItemField.getType() == int.class) {
 
                 return item.getType().getId() == wandItemField.getInt(WorldEdit.getInstance().getConfiguration());
-            } else if (wandItemField.getType() == String.class) { // WorldEdit 1.13+
-                String wandItem = (String) wandItemField.get(WorldEdit.getInstance().getConfiguration());
-
-                return BukkitAdapter.adapt(item).getType().getId().equals(wandItem);
-            } else if (wandItemField.getType() == ItemTypes.class) { // FAWE 1.13+
-                Object wandItemType = wandItemField.get(WorldEdit.getInstance().getConfiguration());
-
-                BaseItemStack baseItem = BukkitAdapter.adapt(item);
-
-                Object itemType = BaseItem.class.getMethod("getType").invoke(baseItem);
-
-                return wandItemType.equals(itemType);
             } else {
                 plugin.getLogger().warning("Unknown type for wandItemField: " + wandItemField.getType().getName());
             }

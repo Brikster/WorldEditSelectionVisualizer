@@ -14,7 +14,6 @@
 
     <modules>
         <module>commons</module>
-        <module>v6</module>
-        <module>v7</module>
+        <module>v5</module>
     </modules>
 </project>

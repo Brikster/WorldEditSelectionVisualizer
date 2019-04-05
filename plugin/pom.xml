@@ -78,20 +78,14 @@
         </dependency>
         <dependency>
             <groupId>com.rojel</groupId>
-            <artifactId>wesv-compatibility-v6</artifactId>
+            <artifactId>wesv-compatibility-v5</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.rojel</groupId>
-            <artifactId>wesv-compatibility-v7</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-bukkit</artifactId>
-            <version>7.0.0-SNAPSHOT</version>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>5.6.3</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -110,6 +104,12 @@
             <groupId>fr.mrmicky</groupId>
             <artifactId>FastParticles</artifactId>
             <version>master-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>5.5.8</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -1,7 +1,7 @@
 package com.rojel.wesv;
 
-import com.rojel.wesv.v6.RegionWrapper6;
-import com.rojel.wesv.v7.RegionWrapper7;
+import com.rojel.wesv.v5.RegionWrapper5;
+import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,12 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public final class WorldEditSelectionVisualizer extends JavaPlugin {
 
@@ -24,7 +19,6 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
     private WorldEditHelper worldEditHelper;
     private ShapeHelper shapeHelper;
     private boolean faweEnabled;
-    private boolean legacyWorldEdit;
 
     private final Set<UUID> shown = new HashSet<>();
     private final Set<UUID> lastSelectionTooLarge = new HashSet<>();
@@ -50,16 +44,6 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
         faweEnabled = getServer().getPluginManager().getPlugin("FastAsyncWorldEdit") != null;
 
         MetricsUtils.register(this);
-
-        try {
-            Class.forName("com.sk89q.worldedit.math.Vector3");
-            legacyWorldEdit = false;
-
-            getLogger().info("Using WorldEdit 7 API");
-        } catch (ClassNotFoundException e) {
-            legacyWorldEdit = true;
-            getLogger().info("Using WorldEdit 6 API");
-        }
 
         if (faweEnabled) {
             getLogger().info("FastAsyncWorldEdit support enabled");
@@ -165,7 +149,7 @@ public final class WorldEditSelectionVisualizer extends JavaPlugin {
     }
 
     public RegionWrapper wrapRegion(Region region) {
-        return legacyWorldEdit ? new RegionWrapper6(region) : new RegionWrapper7(region);
+        return new RegionWrapper5(region);
     }
 
     public boolean isFaweEnabled() {

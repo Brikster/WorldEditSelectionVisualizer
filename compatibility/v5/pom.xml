@@ -9,7 +9,7 @@
         <version>1.6.4</version>
     </parent>
 
-    <artifactId>wesv-compatibility-v6</artifactId>
+    <artifactId>wesv-compatibility-v5</artifactId>
 
     <dependencies>
         <dependency>
@@ -19,9 +19,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-bukkit</artifactId>
-            <version>6.1</version>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>5.6.3</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
